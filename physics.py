@@ -26,3 +26,11 @@ def friction_update(actor):
         actor.vx = -const.MAX_X_SPEED
 
     return
+
+
+
+
+def check_collision(obs_list, player):
+    for obs in obs_list:
+        if player.colliderect(obs):
+            

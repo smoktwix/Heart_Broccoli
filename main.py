@@ -42,6 +42,7 @@ bg_1 = Actor("background_test", topleft=(const.WIDTH,0))
 bg_list = [bg_0, bg_1]
 
 # Marsmallow Obstacles
+# I am making a change here
 obs_list = []
 obs_list.append(Actor("marshmallow", bottomleft=(100,const.HEIGHT)))
 obs_list.append(Actor("marshmallow", bottomleft=(350,const.HEIGHT)))
