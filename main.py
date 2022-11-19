@@ -37,21 +37,21 @@ PLAY_BOX = Rect((1025, 520, 150, 40))
 
 
 # Backgrounds
-bg_0 = Actor("background_test", topleft=(0,0))
-bg_1 = Actor("background_test", topleft=(const.WIDTH,0))
+bg_0 = Actor("mm_background_1", topleft=(0,0))
+bg_1 = Actor("mm_background_2", topleft=(const.WIDTH,0))
 bg_list = [bg_0, bg_1]
 
 # Marsmallow Obstacles
 # I am making a change here
 obs_list = []
-obs_list.append(Actor("marshmallow", bottomleft=(100,const.HEIGHT)))
-obs_list.append(Actor("marshmallow", bottomleft=(350,const.HEIGHT)))
-obs_list.append(Actor("marshmallow", bottomleft=(650,const.HEIGHT)))
-obs_list.append(Actor("marshmallow", bottomleft=(900,const.HEIGHT)))
-obs_list.append(Actor("marshmallow", bottomleft=(1200,const.HEIGHT)))
-obs_list.append(Actor("marshmallow", bottomleft=(1600,const.HEIGHT)))
-obs_list.append(Actor("marshmallow", bottomleft=(2000,const.HEIGHT)))
-obs_list.append(Actor("marshmallow", bottomleft=(2300,const.HEIGHT)))
+obs_list.append(Actor("white_marshmallow", bottomleft=(100,const.HEIGHT)))
+obs_list.append(Actor("white_marshmallow", bottomleft=(350,const.HEIGHT)))
+obs_list.append(Actor("white_marshmallow", bottomleft=(650,const.HEIGHT)))
+obs_list.append(Actor("white_marshmallow", bottomleft=(900,const.HEIGHT)))
+obs_list.append(Actor("white_marshmallow", bottomleft=(1200,const.HEIGHT)))
+obs_list.append(Actor("white_marshmallow", bottomleft=(1600,const.HEIGHT)))
+obs_list.append(Actor("white_marshmallow", bottomleft=(2000,const.HEIGHT)))
+obs_list.append(Actor("white_marshmallow", bottomleft=(2300,const.HEIGHT)))
 
 
 # Player

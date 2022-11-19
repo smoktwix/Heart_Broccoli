@@ -1,2 +1,2 @@
-instructions_text = ''' Nothing for the instructions right now
+instructions_text = ''' Space bar to jump two ways to kill enemies jump on them mario style or shoot them ratchet and clank style
 '''
