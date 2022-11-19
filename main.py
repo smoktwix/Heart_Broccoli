@@ -55,9 +55,10 @@ obs_list.append(Actor("marshmallow", bottomleft=(2300,const.HEIGHT)))
 
 
 # Player
-player = Actor("broccoli", center=(600,460))
+player = Actor("broccoli", center=(700,200))
 player.vx = 0
 player.vy = 0
+player.ontop = False
 
 # Cutscenes 
 cutscene = Actor("cutscene1", topleft=(0,0))
@@ -165,7 +166,8 @@ def update_play():
     vx = player.vx
     manage_actors.move(bg_list, -vx)
     manage_actors.move(obs_list, -vx)
-    
+
+    physics.check_collision(obs_list, player)
     update_play_player()
     physics.gravity_update(player)
     physics.friction_update(player)
@@ -204,8 +206,9 @@ def update():
 
 def on_key_down_play(key):
     if key == keys.SPACE:
-        if player.vy == 0:
+        if player.vy == 0 and player.ontop:
             player.vy = -const.VERT_LAUNCH_SPEED
+            player.ontop = False
 
     return
 
