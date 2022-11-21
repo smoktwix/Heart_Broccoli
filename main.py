@@ -45,19 +45,24 @@ bg_list = [bg_0, bg_1]
 # I am making a change here
 obs_list = []
 obs_list.append(Actor("white_marshmallow", bottomleft=(100,const.HEIGHT)))
-obs_list.append(Actor("white_marshmallow", bottomleft=(350,const.HEIGHT)))
+obs_list.append(Actor("white_marshmallow", bottomleft=(350,350)))
 obs_list.append(Actor("white_marshmallow", bottomleft=(650,const.HEIGHT)))
 obs_list.append(Actor("white_marshmallow", bottomleft=(900,const.HEIGHT)))
 obs_list.append(Actor("white_marshmallow", bottomleft=(1200,const.HEIGHT)))
 obs_list.append(Actor("white_marshmallow", bottomleft=(1600,const.HEIGHT)))
 obs_list.append(Actor("white_marshmallow", bottomleft=(2000,const.HEIGHT)))
-obs_list.append(Actor("white_marshmallow", bottomleft=(2300,const.HEIGHT)))
+obs_list.append(Actor("white_marshmallow", bottomleft=(2173,const.HEIGHT)))
 
 
 # Player
-player = Actor("broccoli", center=(700,200))
+player = Actor("broccoli", center=(150,100))
+# actual x position of player
+player.actual_left = player.left
+# vx - speed in the x-direction
 player.vx = 0
+# vy - speed in the y-direction
 player.vy = 0
+# ontop - are you on top of a marshmallow
 player.ontop = False
 
 # Cutscenes 
@@ -137,7 +142,6 @@ def draw_play():
     '''
       Draws the screen in the play state
     '''  
-    screen.fill("yellow")
     
     for bg in bg_list:
         bg.draw()
@@ -162,8 +166,12 @@ def update_play_player():
 
 
 def update_play():
-    manage_actors.update_player_pos(player)
+    if player.actual_left > -10:
+      manage_actors.update_player_pos(player)
+    else:
+      player.vx = 0.1
     vx = player.vx
+    player.actual_left = player.actual_left + vx
     manage_actors.move(bg_list, -vx)
     manage_actors.move(obs_list, -vx)
 
@@ -206,9 +214,13 @@ def update():
 
 def on_key_down_play(key):
     if key == keys.SPACE:
-        if player.vy == 0 and player.ontop:
+        #if player.vy == 0 and player.ontop:
+        # changed for testing purposes
+        if player.vy == 0:
             player.vy = -const.VERT_LAUNCH_SPEED
             player.ontop = False
+        #else:
+            #player.vy = player.vy - 2
 
     return
 

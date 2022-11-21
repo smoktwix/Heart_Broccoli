@@ -5,6 +5,7 @@ def update_player_pos(actor):
     # we don't move the player in x-direction
     # background moves instead
     #actor.x += actor.vx
+    # actor.y = actor.y + actor.vy
     actor.y += actor.vy
     return
 
