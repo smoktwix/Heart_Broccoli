@@ -2,17 +2,18 @@ import const
 
 
 def update_player_pos(actor):
-    # we don't move the player in x-direction
-    # background moves instead
-    #actor.x += actor.vx
-    # actor.y = actor.y + actor.vy
-    actor.y += actor.vy
-    return
+  '''
+    we don't move the player in x-direction
+    background moves instead
+  '''
+
+  actor.y += actor.vy
+  return
 
 
 def move(actor_list, v):
     '''
-        moves all the actors by velocity v
+        moves all the actors in actor_list by velocity v
         left if v is negative and right if v is positive
 
         actor_list - list of actors

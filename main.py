@@ -1,6 +1,5 @@
 import pgzrun
 import text
-import instructions
 import manage_actors
 import physics
 import const
@@ -46,12 +45,13 @@ bg_list = [bg_0, bg_1]
 obs_list = []
 obs_list.append(Actor("white_marshmallow", bottomleft=(100,const.HEIGHT)))
 obs_list.append(Actor("white_marshmallow", bottomleft=(350,350)))
-obs_list.append(Actor("white_marshmallow", bottomleft=(650,const.HEIGHT)))
-obs_list.append(Actor("white_marshmallow", bottomleft=(900,const.HEIGHT)))
+obs_list.append(Actor("white_marshmallow", bottomleft=(650,450)))
+obs_list.append(Actor("white_marshmallow", bottomleft=(900,250)))
 obs_list.append(Actor("white_marshmallow", bottomleft=(1200,const.HEIGHT)))
-obs_list.append(Actor("white_marshmallow", bottomleft=(1600,const.HEIGHT)))
-obs_list.append(Actor("white_marshmallow", bottomleft=(2000,const.HEIGHT)))
-obs_list.append(Actor("white_marshmallow", bottomleft=(2173,const.HEIGHT)))
+obs_list.append(Actor("white_marshmallow", bottomleft=(1600,500)))
+obs_list.append(Actor("white_marshmallow", bottomleft=(1850,336)))
+obs_list.append(Actor("white_marshmallow", bottomleft=(2173,176)))
+obs_list.append(Actor("pink_marshmallow", bottomleft=(2335,const.HEIGHT)))
 
 
 # Player
@@ -68,21 +68,20 @@ player.ontop = False
 # Cutscenes 
 cutscene = Actor("cutscene1", topleft=(0,0))
 
-color_type = None
-new_color_type = False
+color_type = "green"
+
 def draw_title():
-    global color_type, new_color_type
+    global color_type
     screen.fill("white")
     screen.draw.filled_rect(TITLESCREEN, "dark green")
     screen.draw.filled_rect(INTRODUCTION, "dark red")
     screen.draw.textbox("Heart and Broccoli", TITLESCREEN,color = color_type,shadow=(0.5,0.5))
     screen.draw.textbox(text.intro_text, INTRODUCTION, color = "gold",shadow=(0.5,0.5))
-    if new_color_type:
+    if color_type == "green":
       color_type = "red"
-      new_color_type = False
     else:
       color_type = "green"
-      new_color_type = True
+
     return
   
 def on_mouse_down_state_title(pos):
@@ -124,7 +123,7 @@ def on_mouse_down_state_cutscene(pos):
 def draw_instructions():
     screen.fill("grey")
     screen.draw.filled_rect(INSTRUCTIONS, "dark red")
-    screen.draw.textbox(instructions.instructions_text, INSTRUCTIONS, color = "orange",shadow=(0.5,0.5))
+    screen.draw.textbox(text.instructions_text, INSTRUCTIONS, color = "orange",shadow=(0.5,0.5))
     screen.draw.filled_rect(PLAY_BOX, "dark green")
     screen.draw.textbox("Click to Play", PLAY_BOX,color="gold",shadow=(0.5,0.5))
     return
