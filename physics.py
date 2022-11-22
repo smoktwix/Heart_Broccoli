@@ -41,7 +41,7 @@ def check_collision(obs_list, player):
             
             else: # hitting the side of the obs
                 # changed for testing purposes
-                #player.vx = 0
+                player.vx = 0
                 player.ontop = False
                 return
 
