@@ -180,6 +180,7 @@ def update_play():
     physics.friction_update(player)
     manage_actors.shift_left_to_right(bg_list, obs_list)
 
+
     return
 
 

@@ -24,4 +24,7 @@ FRICTION_ACC = 0.05
 # Limit of your max speed in the x-direction
 MAX_X_SPEED = 20
 
+# Bounce fractional speed
+FRAC_SPEED = 0.5
+
 
