@@ -5,6 +5,8 @@ import physics
 import const
 
 
+
+
 # screen size
 WIDTH = const.WIDTH
 HEIGHT = const.HEIGHT
@@ -54,7 +56,26 @@ obs_list.append(Actor("white_marshmallow", bottomleft=(1200,const.HEIGHT)))
 obs_list.append(Actor("white_marshmallow", bottomleft=(1600,500)))
 obs_list.append(Actor("white_marshmallow", bottomleft=(1850,336)))
 obs_list.append(Actor("white_marshmallow", bottomleft=(2173,176)))
+obs_list.append(Actor("wide_white_marshmallow", bottomleft=(2100,467)))
 obs_list.append(Actor("pink_marshmallow", bottomleft=(2400,const.HEIGHT)))
+obs_list.append(Actor("white_marshmallow", bottomleft=(2750,400)))
+obs_list.append(Actor("white_marshmallow", bottomleft=(3075,545)))
+obs_list.append(Actor("wide_white_marshmallow", bottomleft=(3500,389)))
+obs_list.append(Actor("wide_pink_marshmallow", bottomleft=(3850,225)))
+obs_list.append(Actor("pink_marshmallow", bottomleft=(4282,const.HEIGHT)))
+obs_list.append(Actor("wide_white_marshmallow", bottomleft=(4700,const.HEIGHT)))
+obs_list.append(Actor("pink_marshmallow", bottomleft=(5300,const.HEIGHT)))
+obs_list.append(Actor("pink_marshmallow", bottomleft=(5700,450)))
+obs_list.append(Actor("wide_pink_marshmallow", bottomleft=(6000,250)))
+obs_list.append(Actor("wide_white_marshmallow", bottomleft=(6500,250)))
+obs_list.append(Actor("wide_white_marshmallow", bottomleft=(6685,250)))
+obs_list.append(Actor("wide_white_marshmallow", bottomleft=(6875,250)))
+obs_list.append(Actor("wide_pink_marshmallow", bottomleft=(6500,const.HEIGHT)))
+obs_list.append(Actor("wide_pink_marshmallow", bottomleft=(6685,const.HEIGHT)))
+obs_list.append(Actor("wide_pink_marshmallow", bottomleft=(6875,const.HEIGHT)))
+obs_list.append(Actor("pink_marshmallow", bottomleft=(7065,const.HEIGHT)))
+obs_list.append(Actor("wide_white_marshmallow", bottomleft=(7500,450)))
+
 
 
 # Player
@@ -82,7 +103,7 @@ def draw_title():
       bg.draw()
     screen.draw.filled_rect(TITLESCREEN, "dark green")
     screen.draw.filled_rect(INTRODUCTION, "dark red")
-    screen.draw.textbox("Broccoli in Prophecy Marshmallow", TITLESCREEN,color = color_type,shadow=(0.5,0.5))
+    screen.draw.textbox("Broccoli Prophecy Marshmallow", TITLESCREEN,color = color_type,shadow=(0.5,0.5))
     screen.draw.textbox(text.intro_text_prophecy, INTRODUCTION, color = "gold",shadow=(0.5,0.5))
     if color_type == "green":
       color_type = "black"
@@ -117,21 +138,23 @@ def on_mouse_down_state_cutscene(pos):
     elif NEXT_BOX.collidepoint(pos):
         if cutscene_number == TOTAL_CUTSCENES:
             state = "state_instructions"
+            music.play("into_the_great_mystery")
         else:
             cutscene_number += 1
     elif SKIP_BOX.collidepoint(pos):
         state = "state_instructions"
+        music.play("into_the_great_mystery")
 
 
     cutscene.image = "cutscene" + str(cutscene_number)
     return
-
+  
 
 def draw_instructions():
     for bg in bg_list:
       bg.draw()
     screen.draw.filled_rect(INSTRUCTIONS, "dark red")
-    screen.draw.textbox(text.instructions_text, INSTRUCTIONS, color = "orange",shadow=(0.5,0.5))
+    screen.draw.textbox(text.instructions_text_prophecy, INSTRUCTIONS, color = "orange",shadow=(0.5,0.5))
     screen.draw.filled_rect(PLAY_BOX, "dark green")
     screen.draw.textbox("Click to Play", PLAY_BOX,color="gold",shadow=(0.5,0.5))
   
@@ -141,6 +164,7 @@ def draw_instructions():
 def on_mouse_down_state_instructions(pos):
     global state
     if PLAY_BOX.collidepoint(pos):
+        music.stop()
         state = "state_play"
     return
 
@@ -150,7 +174,6 @@ def draw_play():
     '''
       Draws the screen in the play state
     '''  
-    
     for bg in bg_list:
         bg.draw()
 
@@ -190,6 +213,10 @@ def update_play_player():
 def check_collision_pink(player, obs_list):
   for obs in obs_list:
     if obs.image == "pink_marshmallow":
+      if player.ontop and player.colliderect(obs):
+          player.vy -= const.VERT_LAUNCH_SPEED
+          player.ontop = False
+    elif obs.image == "wide_pink_marshmallow":
       if player.ontop and player.colliderect(obs):
           player.vy -= const.VERT_LAUNCH_SPEED
           player.ontop = False
