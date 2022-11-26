@@ -96,19 +96,26 @@ player_walk_counter2 = 0
 cutscene = Actor("cutscene1", topleft=(0,0))
 
 color_type = "green"
+title_counter = 1
 
 def draw_title():
     global color_type
+    global title_counter
+
+    title_counter += 1
     for bg in bg_list:
       bg.draw()
     screen.draw.filled_rect(TITLESCREEN, "dark green")
     screen.draw.filled_rect(INTRODUCTION, "dark red")
     screen.draw.textbox("Broccoli Prophecy Marshmallow", TITLESCREEN,color = color_type,shadow=(0.5,0.5))
     screen.draw.textbox(text.intro_text_prophecy, INTRODUCTION, color = "gold",shadow=(0.5,0.5))
-    if color_type == "green":
+    if (color_type == "green") and (title_counter % 20 == 0):
       color_type = "black"
-    else:
+    elif (color_type == "black") and (title_counter % 20 == 0):
       color_type = "green"
+    else:
+        pass
+
 
     return
   
