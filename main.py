@@ -14,9 +14,12 @@ HEIGHT = const.HEIGHT
 
 
 
-# Global variables
+# Global Variables
 state = "state_title"
 cutscene_number = 1
+
+# Global Booleans
+  # None for now
 
 # Global Constants
 TOTAL_CUTSCENES = 2
@@ -24,8 +27,8 @@ TOTAL_CUTSCENES = 2
 
 
 # Global Rectangles
-TITLESCREEN = Rect((250, 100, 800, 180))
-INTRODUCTION = Rect((150, 300, 1100, 450))
+TITLESCREEN = Rect((200, 50, 800, 180))
+INTRODUCTION = Rect((75, 250, 1050, 325))
 PREVIOUS_BOX = Rect((840,520,140,40))
 NEXT_BOX = Rect((1000,520,80,40))
 SKIP_BOX = Rect((1100,520,80,40))
@@ -51,11 +54,11 @@ obs_list.append(Actor("white_marshmallow", bottomleft=(1200,const.HEIGHT)))
 obs_list.append(Actor("white_marshmallow", bottomleft=(1600,500)))
 obs_list.append(Actor("white_marshmallow", bottomleft=(1850,336)))
 obs_list.append(Actor("white_marshmallow", bottomleft=(2173,176)))
-obs_list.append(Actor("pink_marshmallow", bottomleft=(2335,const.HEIGHT)))
+obs_list.append(Actor("pink_marshmallow", bottomleft=(2400,const.HEIGHT)))
 
 
 # Player
-player = Actor("broccoli", center=(150,100))
+player = Actor("broccoli", center=(150,400))
 # actual x position of player
 player.actual_left = player.left
 # vx - speed in the x-direction
@@ -65,6 +68,9 @@ player.vy = 0
 # ontop - are you on top of a marshmallow
 player.ontop = False
 
+player_walk_counter = 0
+player_walk_counter2 = 0
+
 # Cutscenes 
 cutscene = Actor("cutscene1", topleft=(0,0))
 
@@ -72,13 +78,14 @@ color_type = "green"
 
 def draw_title():
     global color_type
-    screen.fill("white")
+    for bg in bg_list:
+      bg.draw()
     screen.draw.filled_rect(TITLESCREEN, "dark green")
     screen.draw.filled_rect(INTRODUCTION, "dark red")
-    screen.draw.textbox("Heart and Broccoli", TITLESCREEN,color = color_type,shadow=(0.5,0.5))
-    screen.draw.textbox(text.intro_text, INTRODUCTION, color = "gold",shadow=(0.5,0.5))
+    screen.draw.textbox("Broccoli in Prophecy Marshmallow", TITLESCREEN,color = color_type,shadow=(0.5,0.5))
+    screen.draw.textbox(text.intro_text_prophecy, INTRODUCTION, color = "gold",shadow=(0.5,0.5))
     if color_type == "green":
-      color_type = "red"
+      color_type = "black"
     else:
       color_type = "green"
 
@@ -121,11 +128,13 @@ def on_mouse_down_state_cutscene(pos):
 
 
 def draw_instructions():
-    screen.fill("grey")
+    for bg in bg_list:
+      bg.draw()
     screen.draw.filled_rect(INSTRUCTIONS, "dark red")
     screen.draw.textbox(text.instructions_text, INSTRUCTIONS, color = "orange",shadow=(0.5,0.5))
     screen.draw.filled_rect(PLAY_BOX, "dark green")
     screen.draw.textbox("Click to Play", PLAY_BOX,color="gold",shadow=(0.5,0.5))
+  
     return
 
 
@@ -155,13 +164,36 @@ def draw_play():
 
 
 def update_play_player():
-    if player.vy == 0:
-        if keyboard.left:
-            player.vx += -const.HORZ_ACC
-        if keyboard.right:
-            player.vx += const.HORZ_ACC
+    global player_walk_counter, player_walk_counter2
+    #if player.vy == 0:
+    #this was changed because it was annoying not to be able to move in air and causes gameplay issues
+    if keyboard.left:
+         player.vx += -const.HORZ_ACC
+    if keyboard.right:
+        player.vx += const.HORZ_ACC
+    if player.vx > 0:
+      player_walk_counter += 1
+      image_counter = (player_walk_counter % 4) + 1
+      player.image = "broccoli_walk_right" + str(image_counter)
+    elif player.vx < 0:
+      player_walk_counter2 += 1
+      image_counter2 = (player_walk_counter2 % 4) + 1
+      player.image = "broccoli_walk_left" + str(image_counter2)
+    else:
+      player.image = "broccoli"
+      
+    
     return
 
+
+
+def check_collision_pink(player, obs_list):
+  for obs in obs_list:
+    if obs.image == "pink_marshmallow":
+      if player.ontop and player.colliderect(obs):
+          player.vy -= const.VERT_LAUNCH_SPEED
+          player.ontop = False
+  return
 
 
 def update_play():
@@ -174,11 +206,13 @@ def update_play():
     manage_actors.move(bg_list, -vx)
     manage_actors.move(obs_list, -vx)
 
+    check_collision_pink(player, obs_list)
+  
     physics.check_collision(obs_list, player)
     update_play_player()
     physics.gravity_update(player)
     physics.friction_update(player)
-    manage_actors.shift_left_to_right(bg_list, obs_list)
+    manage_actors.shift_left_to_right(bg_list)#, obs_list)
 
 
     return

@@ -27,23 +27,23 @@ def move(actor_list, v):
 
 
 
-def shift_left_to_right(bg_list, obs_list):
+def shift_left_to_right(bg_list):#, obs_list)
     if len(bg_list) != 0:
         if bg_list[0].right < 0:
             a = bg_list.pop(0)
             a.topleft = (const.WIDTH + a.right, 0)
             bg_list.append(a)
-            for i in range(len(obs_list)):
-                if obs_list[i].right < 0:
-                    obs_list[i].x += 2*const.WIDTH
+            #for i in range(len(obs_list)):
+                #if obs_list[i].right < 0:
+                    #obs_list[i].x += 2*const.WIDTH
 
         if bg_list[-1].left > const.WIDTH:
             a = bg_list.pop(-1)
             a.topright = (a.left - const.WIDTH,0)
             bg_list.insert(0, a)
-            for i in range(len(obs_list)):
-                if obs_list[i].left > const.WIDTH:
-                    obs_list[i].x -= 2*const.WIDTH
+            #for i in range(len(obs_list)):
+                #if obs_list[i].left > const.WIDTH:
+                    #obs_list[i].x -= 2*const.WIDTH
             
 
     return  
@@ -65,9 +65,9 @@ def shift_bg_left_to_right(bg_list):
 
 
 
-def shift_obs_left_to_right(obs_list):
-    for i in range(len(obs_list)):
-        if obs_list[i].right < 0:
-            obs_list[i].x += 2*const.WIDTH 
+#def shift_obs_left_to_right(obs_list):
+    #for i in range(len(obs_list)):
+        #if obs_list[i].right < 0:
+            #obs_list[i].x += 2*const.WIDTH 
 
-    return            
+    #return            
