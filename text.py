@@ -6,5 +6,7 @@ instructions_text = ''' Space bar to jump right and left arrow key's to move lef
 
 intro_text_prophecy = ''' In a story set far before the events of the apocalyptic junk day that will destroy the entire world Applecartis the creator of the medicinic sphere meant to protect all living things has put a vision inside of the dream of the chosen one he knows is destined to be the one true protector of the medicinic sphere the health gaurdian this vision put by him will decide the fate of the entire world
 '''
-instructions_text_prophecy = ''' Space bar to jump right and left arrow key's to move left and right use the physics to your advantage by making good jumps from platform to platfrom and using level gimmicks to your advantage for example use the pink marshmallow in this level to bounce from platform to platform or use the wider marshmallow platforms for a bigger run before you jump or to have more room to bounce on the platform if it's a pink one well that's all enjoy
+instructions_text_prophecy = ''' Use space bar to jump 
+Use right and left arrow keys to move left and right
+Use the physics to your advantage by making good jumps from platform to platfrom and using level gimmicks to your advantage for example use the pink marshmallow in this level to bounce from platform to platform or use the wider marshmallow platforms for a bigger run before you jump or to have more room to bounce on the platform if it's a pink one well that's all. Enjoy!
 '''
