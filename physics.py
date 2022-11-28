@@ -6,8 +6,9 @@ def gravity_update(actor):
     if actor.bottom < const.HEIGHT:
         if not actor.ontop:
             actor.vy += const.GRAVITY_ACC
+     
     else:
-        actor.vy = 0
+      actor.vy = 0
     return
 
 

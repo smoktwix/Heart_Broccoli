@@ -75,6 +75,16 @@ obs_list.append(Actor("wide_pink_marshmallow", bottomleft=(6685,const.HEIGHT)))
 obs_list.append(Actor("wide_pink_marshmallow", bottomleft=(6875,const.HEIGHT)))
 obs_list.append(Actor("pink_marshmallow", bottomleft=(7065,const.HEIGHT)))
 obs_list.append(Actor("wide_white_marshmallow", bottomleft=(7500,450)))
+obs_list.append(Actor("white_marshmallow", bottomleft=(8000,200)))
+obs_list.append(Actor("white_marshmallow", bottomleft=(8000,const.HEIGHT)))
+obs_list.append(Actor("white_marshmallow", bottomleft=(8500,300)))
+obs_list.append(Actor("pink_marshmallow", bottomleft=(8350,const.HEIGHT)))
+obs_list.append(Actor("wide_pink_marshmallow", bottomleft=(8750,450)))
+obs_list.append(Actor("wide_white_marshmallow", bottomleft=(9500,const.HEIGHT)))
+obs_list.append(Actor("white_marshmallow", bottomleft=(8950,260)))
+obs_list.append(Actor("golden_marshmallow", bottomleft=(10000,const.HEIGHT)))
+
+
 
 
 
@@ -91,9 +101,13 @@ player.ontop = False
 
 player_walk_counter = 0
 player_walk_counter2 = 0
+player_fall_counter = 0
 
 # Cutscenes 
 cutscene = Actor("cutscene1", topleft=(0,0))
+
+# Music
+music.play("into_the_great_dream")
 
 color_type = "green"
 title_counter = 1
@@ -107,11 +121,11 @@ def draw_title():
       bg.draw()
     screen.draw.filled_rect(TITLESCREEN, "dark green")
     screen.draw.filled_rect(INTRODUCTION, "dark red")
-    screen.draw.textbox("Broccoli Prophecy Marshmallow", TITLESCREEN,color = color_type,shadow=(0.5,0.5))
+    screen.draw.textbox("Broccoli The Great Telling", TITLESCREEN,color = color_type,shadow=(0.5,0.5))
     screen.draw.textbox(text.intro_text_prophecy, INTRODUCTION, color = "gold",shadow=(0.5,0.5))
     if (color_type == "green") and (title_counter % 20 == 0):
-      color_type = "black"
-    elif (color_type == "black") and (title_counter % 20 == 0):
+      color_type = "white"
+    elif (color_type == "white") and (title_counter % 20 == 0):
       color_type = "green"
     else:
         pass
@@ -122,6 +136,7 @@ def draw_title():
 def on_mouse_down_state_title(pos):
     global state
     if INTRODUCTION.collidepoint(pos):
+        music.stop()
         state = "state_cutscene"
 
 
@@ -194,14 +209,19 @@ def draw_play():
 
 
 def update_play_player():
-    global player_walk_counter, player_walk_counter2
+    global player_walk_counter, player_walk_counter2, player_fall_counter, state
     #if player.vy == 0:
     #this was changed because it was annoying not to be able to move in air and causes gameplay issues
     if keyboard.left:
          player.vx += -const.HORZ_ACC
     if keyboard.right:
         player.vx += const.HORZ_ACC
-    if player.vx > 0:
+
+    if player.vy > 0:
+      player_fall_counter += 1
+      fall_image_counter = (player_fall_counter % 5) + 1
+      player.image = "broccoli_fall" + str(fall_image_counter) 
+    elif player.vx > 0:
       player_walk_counter += 1
       image_counter = (player_walk_counter % 4) + 1
       player.image = "broccoli_walk_right" + str(image_counter)
@@ -211,13 +231,15 @@ def update_play_player():
       player.image = "broccoli_walk_left" + str(image_counter2)
     else:
       player.image = "broccoli"
+    #if player.bottom >= 600:
+      #state = "state_game_over"
       
     
     return
 
 
-
-def check_collision_pink(player, obs_list):
+def check_collision_pink_and_gold(player, obs_list):
+  global state
   for obs in obs_list:
     if obs.image == "pink_marshmallow":
       if player.ontop and player.colliderect(obs):
@@ -227,20 +249,37 @@ def check_collision_pink(player, obs_list):
       if player.ontop and player.colliderect(obs):
           player.vy -= const.VERT_LAUNCH_SPEED
           player.ontop = False
+    elif obs.image == "golden_marshmallow":
+      if player.ontop and player.colliderect(obs):
+          state = "state_game_won"
+      
   return
 
 
+def draw_state_game_won():
+  screen.fill("dark green")
+  screen.draw.text("You Won The Game! hope still remains for this world despite the darkness that is coming",topleft = (150,300),fontsize = 30,color = "dark red",shadow=(0.5,0.5))
+  screen.draw.text("Thank You For Playing",topleft = (600, 350),fontsize = 30,color = "white",shadow=(0.5,0.5))
+  return
+
+
+def draw_game_over():
+    screen.fill("white")
+    screen.draw.text("Broccolis Vison has ended he will never be able to furfill the prophecy the world is doomed junk day is coming Game Over!",topleft = (125,300), fontsize = 30, color = "dark red",shadow=(0.5,0.5))
+    return
+
+
+
+
+          
 def update_play():
-    if player.actual_left > -10:
-      manage_actors.update_player_pos(player)
-    else:
-      player.vx = 0.1
+    manage_actors.update_player_pos(player)
     vx = player.vx
     player.actual_left = player.actual_left + vx
     manage_actors.move(bg_list, -vx)
     manage_actors.move(obs_list, -vx)
 
-    check_collision_pink(player, obs_list)
+    check_collision_pink_and_gold(player, obs_list)
   
     physics.check_collision(obs_list, player)
     update_play_player()
@@ -284,7 +323,7 @@ def on_key_down_play(key):
     if key == keys.SPACE:
         #if player.vy == 0 and player.ontop:
         # changed for testing purposes
-        if player.vy == 0:
+        if player.vy == 0: # player is on the ground or on white marshmallow
             player.vy = -const.VERT_LAUNCH_SPEED
             player.ontop = False
         #else:
