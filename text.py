@@ -4,9 +4,10 @@ intro_text = ''' In this world health realted objects are alive their health pro
 instructions_text = ''' Space bar to jump right and left arrow key's to move left and right use the physics to your advantage by making good jumps from platform to platfrom and using level gimmicks to your advantage for example use the pink marshmallow in this level to bounce there are enemies in this level shoot them ratchet and clank style with the worst weapon broccoli broccoli will throw parts of himself into there mouths and make them see just how terrible it is to eat broccoli
 '''
 
-intro_text_prophecy = ''' In a story set far before the events of the apocalyptic junk day that will destroy the entire world Applecartis the creator of the medicinic sphere meant to protect all living things has put a vision inside of the dream of the chosen one he knows is destined to be the one true protector of the medicinic sphere the health gaurdian this vision put by him will decide the fate of the entire world
+intro_text_prophecy = ''' In a story set far before the events of the apocalyptic junk day that will destroy the entire world. Applecartis the creator of the medicinic sphere meant to protect all living things has put a vision inside the dream of the chosen one he knows is destined to be the one true protector. The health gaurdian in this vision of Applecartis will decide the fate of the entire world
 '''
 instructions_text_prophecy = ''' Use space bar to jump 
 Use right and left arrow keys to move left and right
-Use the physics to your advantage by making good jumps from platform to platfrom and using level gimmicks to your advantage for example use the pink marshmallow in this level to bounce from platform to platform or use the wider marshmallow platforms for a bigger run before you jump or to have more room to bounce on the platform if it's a pink one well that's all. Enjoy!
+
+Use the physics to your advantage by making jumps from platform to platfrom. Use the level gimmicks to your advantage. Pink marshmallow allow for automatic jumps. Use the wider marshmallow platforms for more room to bounce or for a bigger run before you jump.  Make your way to the Golden marshmallow to win.  Fall of the platform and you lose! That's all. Enjoy!
 '''
