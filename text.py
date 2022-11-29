@@ -9,5 +9,5 @@ intro_text_prophecy = ''' In a story set far before the events of the apocalypti
 instructions_text_prophecy = ''' Use space bar to jump 
 Use right and left arrow keys to move left and right
 
-Use the physics to your advantage by making jumps from platform to platfrom. Use the level gimmicks to your advantage. Pink marshmallow allow for automatic jumps. Use the wider marshmallow platforms for more room to bounce or for a bigger run before you jump.  Make your way to the Golden marshmallow to win.  Fall of the platform and you lose! That's all. Enjoy!
+Use the physics to your advantage by making jumps from platform to platfrom. Use the level gimmicks to your advantage. Pink marshmallow create automatic jumps. Use the wider marshmallow platforms for more room to bounce or for a bigger run before you jump.  Make your way to the Golden marshmallow to win.  Fall off the platform and you lose! That's all. Enjoy!
 '''
