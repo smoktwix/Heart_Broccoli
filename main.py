@@ -141,9 +141,10 @@ player_fall_counter = 0
 
 # Cutscenes 
 cutscene = Actor("cutscene1", topleft=(0,0))
+doomed_world = Actor("cutscene30", topleft=(0,0))
+saved_world = Actor("cutscene33", topleft=(0,0))
 
-# Music
-music.play("into_the_great_dream")
+# Music there won't be any music the original was scrapped for not fitting in the game and being bad
 
 color_type = "green"
 title_counter = 1
@@ -170,7 +171,6 @@ def draw_title():
 def on_mouse_down_state_title(pos):
     global state
     if INTRODUCTION.collidepoint(pos):
-        music.stop()
         state = "state_cutscene"
 
 
@@ -194,12 +194,10 @@ def on_mouse_down_state_cutscene(pos):
     elif NEXT_BOX.collidepoint(pos):
         if cutscene_number == TOTAL_CUTSCENES:
             state = "state_instructions"
-            music.play("into_the_great_mystery")
         else:
             cutscene_number += 1
     elif SKIP_BOX.collidepoint(pos):
         state = "state_instructions"
-        music.play("into_the_great_mystery")
 
 
     cutscene.image = "cutscene" + str(cutscene_number)
@@ -220,7 +218,6 @@ def draw_instructions():
 def on_mouse_down_state_instructions(pos):
     global state
     if PLAY_BOX.collidepoint(pos):
-        music.stop()
         state = "state_play"
     return
 
@@ -285,13 +282,13 @@ def check_collision_pink_and_gold(player, obs_list):
           player.ontop = False
     elif obs.image == "golden_marshmallow":
       if player.ontop and player.colliderect(obs):
-          state = "state_cutscenes2"
+          state = "state_end_cutscenes"
       
   return
 
 
 def draw_state_game_won():
-  screen.fill("dark green")
+  saved_world.draw()
   screen.draw.text("You Won The Game!", topleft = (25,150), fontsize = 60, color = "gold", shadow = (0.5, 0.5))
   screen.draw.text("The great telling is complete", topleft = (25,200), fontsize = 60, color = "red", shadow = (0.5, 0.5))
   screen.draw.text("The light of the health sphere's chosen messiah", topleft = (25,250), fontsize = 60, color = "red", shadow = (0.5, 0.5))
@@ -303,6 +300,7 @@ def draw_state_game_won():
 
 
 def draw_game_over():
+    doomed_world.draw()
     screen.draw.text("Broccolis Vison has ended",topleft = (250,150), fontsize = 60, color = "red",shadow=(0.5,0.5))
     screen.draw.text("he will never be able to fulfill",topleft = (250,200), fontsize = 60, color = "red",shadow=(0.5,0.5))
     screen.draw.text("the prophecy and the world is doomed", topleft = (250,250), fontsize = 60, color = "red", shadow = (0.5, 0.5))
@@ -347,7 +345,7 @@ def draw():
         draw_play()
     elif state == "state_game_over":
         draw_game_over()
-    elif state == "state_cutscenes2":
+    elif state == "state_end_cutscenes":
         print("hello world")
     elif state == "state_game_won":
         draw_state_game_won()
