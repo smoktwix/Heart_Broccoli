@@ -301,10 +301,10 @@ def draw_state_game_won():
 
 def draw_game_over():
     doomed_world.draw()
-    screen.draw.text("Broccolis Vison has ended",topleft = (250,150), fontsize = 60, color = "red",shadow=(0.5,0.5))
-    screen.draw.text("he will never be able to fulfill",topleft = (250,200), fontsize = 60, color = "red",shadow=(0.5,0.5))
-    screen.draw.text("the prophecy and the world is doomed", topleft = (250,250), fontsize = 60, color = "red", shadow = (0.5, 0.5))
-    screen.draw.text("JUNK DAY IS COMING GAME OVER!",topleft = (250,300), fontsize = 60, color = "dark red",shadow=(0.5,0.5))
+    screen.draw.text("Broccoli's Vison has ended",topleft = (250,150), fontsize = 60, color = "red",shadow=(0.5,0.5))
+    screen.draw.text("He will never be able to fulfill",topleft = (250,200), fontsize = 60, color = "red",shadow=(0.5,0.5))
+    screen.draw.text("the prophecy and the world is doomed!", topleft = (250,250), fontsize = 60, color = "red", shadow = (0.5, 0.5))
+    screen.draw.text("JUNK DAY IS COMING! GAME OVER!",topleft = (250,300), fontsize = 60, color = "dark red",shadow=(0.5,0.5))
     return
 
 
