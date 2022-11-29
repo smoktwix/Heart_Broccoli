@@ -19,12 +19,15 @@ HEIGHT = const.HEIGHT
 # Global Variables
 state = "state_title"
 cutscene_number = 1
+end_cutscene_number = 18
 
 # Global Booleans
   # None for now
 
 # Global Constants
 TOTAL_CUTSCENES = 17
+START_END_CUTSCENE = 18
+END_END_CUTSCENE = 34
 
 
 
@@ -120,8 +123,9 @@ obs_list.append(Actor("wide_white_marshmallow", bottomleft=(24675,200)))
 obs_list.append(Actor("golden_marshmallow", bottomleft=(25500,const.HEIGHT)))
 
 
-
-
+#Use this to test
+#obs_list = obs_list[:3]
+#obs_list.append(Actor("golden_marshmallow", bottomleft=(900,const.HEIGHT)))
 
 
 # Player
@@ -143,6 +147,8 @@ player_fall_counter = 0
 cutscene = Actor("cutscene1", topleft=(0,0))
 doomed_world = Actor("cutscene30", topleft=(0,0))
 saved_world = Actor("cutscene33", topleft=(0,0))
+
+end_cutscene = Actor("cutscene18", topleft=(0,0))
 
 # Music there won't be any music the original was scrapped for not fitting in the game and being bad
 
@@ -184,6 +190,18 @@ def draw_cutscene():
   screen.draw.textbox("Skip", SKIP_BOX,color="grey",shadow=(0.5,0.5))
 
 
+def draw_end_cutscene():
+  end_cutscene.draw()
+  if end_cutscene_number != START_END_CUTSCENE:
+      screen.draw.filled_rect(PREVIOUS_BOX, "dark red")
+      screen.draw.textbox("Previous", PREVIOUS_BOX,color="red",shadow=(0.5,0.5))
+  screen.draw.filled_rect(NEXT_BOX, "dark green")
+  screen.draw.textbox("Next", NEXT_BOX,color="green",shadow=(0.5,0.5))
+  screen.draw.filled_rect(SKIP_BOX, "white")
+  screen.draw.textbox("Skip", SKIP_BOX,color="grey",shadow=(0.5,0.5))
+
+
+
 def on_mouse_down_state_cutscene(pos):
     global state, cutscene_number
     if PREVIOUS_BOX.collidepoint(pos):
@@ -203,6 +221,24 @@ def on_mouse_down_state_cutscene(pos):
     cutscene.image = "cutscene" + str(cutscene_number)
     return
   
+
+def on_mouse_down_state_end_cutscene(pos):
+    global state, end_cutscene_number
+    if PREVIOUS_BOX.collidepoint(pos) and (end_cutscene_number > START_END_CUTSCENE):
+        end_cutscene_number -= 1
+    if NEXT_BOX.collidepoint(pos):
+        if end_cutscene_number == END_END_CUTSCENE:
+            state = "state_game_won"
+        else:
+            end_cutscene_number += 1
+    elif SKIP_BOX.collidepoint(pos):
+        state = "state_game_won"
+
+
+    end_cutscene.image = "cutscene" + str(end_cutscene_number)
+    return
+
+
 
 def draw_instructions():
     for bg in bg_list:
@@ -346,7 +382,7 @@ def draw():
     elif state == "state_game_over":
         draw_game_over()
     elif state == "state_end_cutscenes":
-        print("hello world")
+        draw_end_cutscene()
     elif state == "state_game_won":
         draw_state_game_won()
     else:
@@ -390,6 +426,9 @@ def on_mouse_down(pos):
     on_mouse_down_state_cutscene(pos)
   elif state == "state_instructions":
     on_mouse_down_state_instructions(pos)
+  elif state == "state_end_cutscenes":
+    on_mouse_down_state_end_cutscene(pos)
+
     
 pgzrun.go()
 
