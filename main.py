@@ -69,7 +69,7 @@ obs_list.append(Actor("pink_marshmallow", bottomleft=(5700,450)))
 obs_list.append(Actor("wide_pink_marshmallow", bottomleft=(6000,250)))
 obs_list.append(Actor("wide_white_marshmallow", bottomleft=(6500,250)))
 obs_list.append(Actor("wide_white_marshmallow", bottomleft=(6685,250)))
-obs_list.append(Actor("wide_white_marshmallow", bottomleft=(6875,250)))
+obs_list.append(Actor("wide_white_marshmallow", bottomleft=(6870,250)))
 obs_list.append(Actor("wide_pink_marshmallow", bottomleft=(6500,const.HEIGHT)))
 obs_list.append(Actor("wide_pink_marshmallow", bottomleft=(6685,const.HEIGHT)))
 obs_list.append(Actor("wide_pink_marshmallow", bottomleft=(6875,const.HEIGHT)))
@@ -82,7 +82,43 @@ obs_list.append(Actor("pink_marshmallow", bottomleft=(8350,const.HEIGHT)))
 obs_list.append(Actor("wide_pink_marshmallow", bottomleft=(8750,450)))
 obs_list.append(Actor("wide_white_marshmallow", bottomleft=(9500,const.HEIGHT)))
 obs_list.append(Actor("white_marshmallow", bottomleft=(8950,260)))
-obs_list.append(Actor("golden_marshmallow", bottomleft=(10000,const.HEIGHT)))
+obs_list.append(Actor("white_marshmallow", bottomleft=(10250,300)))
+obs_list.append(Actor("white_marshmallow", bottomleft=(10650,400)))
+obs_list.append(Actor("white_marshmallow", bottomleft=(11000,300)))
+obs_list.append(Actor("white_marshmallow", bottomleft=(11500,300)))
+obs_list.append(Actor("wide_white_marshmallow", bottomleft=(12000,300)))
+obs_list.append(Actor("white_marshmallow", bottomleft=(13000,450)))
+obs_list.append(Actor("pink_marshmallow", bottomleft=(13250,250)))
+obs_list.append(Actor("wide_pink_marshmallow", bottomleft=(14200,const.HEIGHT)))
+obs_list.append(Actor("pink_marshmallow", bottomleft=(14557,300)))
+obs_list.append(Actor("wide_white_marshmallow", bottomleft=(14457,const.HEIGHT)))
+obs_list.append(Actor("wide_white_marshmallow", bottomleft=(14642,const.HEIGHT)))
+obs_list.append(Actor("wide_pink_marshmallow", bottomleft=(15758,const.HEIGHT)))
+obs_list.append(Actor("pink_marshmallow", bottomleft=(15400,const.HEIGHT)))
+obs_list.append(Actor("wide_white_marshmallow", bottomleft=(15900,300)))
+obs_list.append(Actor("white_marshmallow", bottomleft=(16400,200)))
+obs_list.append(Actor("white_marshmallow", bottomleft=(17850,const.HEIGHT)))
+obs_list.append(Actor("pink_marshmallow", bottomleft=(17175,460)))
+obs_list.append(Actor("wide_pink_marshmallow", bottomleft=(18345,300)))
+obs_list.append(Actor("wide_pink_marshmallow", bottomleft=(19150,const.HEIGHT)))
+obs_list.append(Actor("wide_pink_marshmallow", bottomleft=(19800,const.HEIGHT)))
+obs_list.append(Actor("pink_marshmallow", bottomleft=(20000,350)))
+obs_list.append(Actor("wide_pink_marshmallow", bottomleft=(20700,350)))
+obs_list.append(Actor("pink_marshmallow", bottomleft=(21400,300)))
+obs_list.append(Actor("wide_pink_marshmallow", bottomleft=(22100,450)))
+obs_list.append(Actor("white_marshmallow", bottomleft=(22700,const.HEIGHT)))
+obs_list.append(Actor("wide_white_marshmallow", bottomleft=(23250,const.HEIGHT)))
+obs_list.append(Actor("wide_white_marshmallow", bottomleft=(23435,const.HEIGHT)))
+obs_list.append(Actor("pink_marshmallow", bottomleft=(23625,const.HEIGHT)))
+obs_list.append(Actor("wide_pink_marshmallow", bottomleft=(23400,325)))
+obs_list.append(Actor("wide_white_marshmallow", bottomleft=(23750,200)))
+obs_list.append(Actor("wide_white_marshmallow", bottomleft=(23935,200)))
+obs_list.append(Actor("wide_white_marshmallow", bottomleft=(24120,200)))
+obs_list.append(Actor("wide_white_marshmallow", bottomleft=(24305,200)))
+obs_list.append(Actor("wide_white_marshmallow", bottomleft=(24490,200)))
+obs_list.append(Actor("wide_white_marshmallow", bottomleft=(24675,200)))
+obs_list.append(Actor("golden_marshmallow", bottomleft=(25500,const.HEIGHT)))
+
 
 
 
@@ -249,7 +285,7 @@ def check_collision_pink_and_gold(player, obs_list):
           player.ontop = False
     elif obs.image == "golden_marshmallow":
       if player.ontop and player.colliderect(obs):
-          state = "state_game_won"
+          state = "state_cutscenes2"
       
   return
 
@@ -311,6 +347,8 @@ def draw():
         draw_play()
     elif state == "state_game_over":
         draw_game_over()
+    elif state == "state_cutscenes2":
+        print("hello world")
     elif state == "state_game_won":
         draw_state_game_won()
     else:
