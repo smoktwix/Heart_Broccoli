@@ -24,7 +24,7 @@ cutscene_number = 1
   # None for now
 
 # Global Constants
-TOTAL_CUTSCENES = 2
+TOTAL_CUTSCENES = 17
 
 
 
@@ -115,10 +115,8 @@ title_counter = 1
 def draw_title():
     global color_type
     global title_counter
-
+    cutscene.draw()
     title_counter += 1
-    for bg in bg_list:
-      bg.draw()
     screen.draw.filled_rect(TITLESCREEN, "dark green")
     screen.draw.filled_rect(INTRODUCTION, "dark red")
     screen.draw.textbox("Broccoli The Great Telling", TITLESCREEN,color = color_type,shadow=(0.5,0.5))
@@ -231,8 +229,8 @@ def update_play_player():
       player.image = "broccoli_walk_left" + str(image_counter2)
     else:
       player.image = "broccoli"
-    #if player.bottom >= 600:
-      #state = "state_game_over"
+    if player.bottom >= 600:
+      state = "state_game_over"
       
     
     return
@@ -258,15 +256,23 @@ def check_collision_pink_and_gold(player, obs_list):
 
 def draw_state_game_won():
   screen.fill("dark green")
-  screen.draw.text("You Won The Game! hope still remains for this world despite the darkness that is coming",topleft = (150,300),fontsize = 30,color = "dark red",shadow=(0.5,0.5))
-  screen.draw.text("Thank You For Playing",topleft = (600, 350),fontsize = 30,color = "white",shadow=(0.5,0.5))
+  screen.draw.text("You Won The Game!", topleft = (25,150), fontsize = 60, color = "gold", shadow = (0.5, 0.5))
+  screen.draw.text("The great telling is complete", topleft = (25,200), fontsize = 60, color = "red", shadow = (0.5, 0.5))
+  screen.draw.text("The light of the health sphere's chosen messiah", topleft = (25,250), fontsize = 60, color = "red", shadow = (0.5, 0.5))
+  screen.draw.text("shines bright on the world despite the darkness that is coming", topleft = (25,300), fontsize = 55, color = "forest green", shadow = (0.5, 0.5))
+  screen.draw.text("Thank You For Playing", topleft = (375, 350), fontsize = 60, color = "gold", shadow = (0.5, 0.5))
   return
 
 
+
+
 def draw_game_over():
-    screen.fill("white")
-    screen.draw.text("Broccolis Vison has ended he will never be able to furfill the prophecy the world is doomed junk day is coming Game Over!",topleft = (125,300), fontsize = 30, color = "dark red",shadow=(0.5,0.5))
+    screen.draw.text("Broccolis Vison has ended",topleft = (250,150), fontsize = 60, color = "red",shadow=(0.5,0.5))
+    screen.draw.text("he will never be able to fulfill",topleft = (250,200), fontsize = 60, color = "red",shadow=(0.5,0.5))
+    screen.draw.text("the prophecy and the world is doomed", topleft = (250,250), fontsize = 60, color = "red", shadow = (0.5, 0.5))
+    screen.draw.text("JUNK DAY IS COMING GAME OVER!",topleft = (250,300), fontsize = 60, color = "dark red",shadow=(0.5,0.5))
     return
+
 
 
 
