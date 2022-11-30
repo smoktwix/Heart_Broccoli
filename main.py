@@ -37,6 +37,9 @@ INTRODUCTION = Rect((75, 250, 1050, 325))
 PREVIOUS_BOX = Rect((840,520,140,40))
 NEXT_BOX = Rect((1000,520,80,40))
 SKIP_BOX = Rect((1100,520,80,40))
+PREVIOUS_BOX2 = Rect((25,520,140,40))
+NEXT_BOX2 = Rect((185,520,80,40))
+SKIP_BOX2 = Rect((285,520,80,40))
 INSTRUCTIONS = Rect(200,100,800,400)
 PLAY_BOX = Rect((1025, 520, 150, 40))
 
@@ -73,6 +76,7 @@ obs_list.append(Actor("wide_pink_marshmallow", bottomleft=(6000,250)))
 obs_list.append(Actor("wide_white_marshmallow", bottomleft=(6500,250)))
 obs_list.append(Actor("wide_white_marshmallow", bottomleft=(6685,250)))
 obs_list.append(Actor("wide_white_marshmallow", bottomleft=(6870,250)))
+obs_list.append(Actor("wide_white_marshmallow", bottomleft=(6310,650)))
 obs_list.append(Actor("wide_pink_marshmallow", bottomleft=(6500,const.HEIGHT)))
 obs_list.append(Actor("wide_pink_marshmallow", bottomleft=(6685,const.HEIGHT)))
 obs_list.append(Actor("wide_pink_marshmallow", bottomleft=(6875,const.HEIGHT)))
@@ -80,34 +84,35 @@ obs_list.append(Actor("pink_marshmallow", bottomleft=(7065,const.HEIGHT)))
 obs_list.append(Actor("wide_white_marshmallow", bottomleft=(7500,450)))
 obs_list.append(Actor("white_marshmallow", bottomleft=(8000,200)))
 obs_list.append(Actor("white_marshmallow", bottomleft=(8000,const.HEIGHT)))
-obs_list.append(Actor("white_marshmallow", bottomleft=(8500,300)))
+obs_list.append(Actor("white_marshmallow", bottomleft=(8500,325)))
 obs_list.append(Actor("pink_marshmallow", bottomleft=(8350,const.HEIGHT)))
 obs_list.append(Actor("wide_pink_marshmallow", bottomleft=(8750,450)))
 obs_list.append(Actor("wide_white_marshmallow", bottomleft=(9500,const.HEIGHT)))
-obs_list.append(Actor("white_marshmallow", bottomleft=(8950,260)))
+obs_list.append(Actor("white_marshmallow", bottomleft=(9110,260)))
 obs_list.append(Actor("white_marshmallow", bottomleft=(10250,300)))
-obs_list.append(Actor("white_marshmallow", bottomleft=(10650,400)))
+obs_list.append(Actor("wide_white_marshmallow", bottomleft=(10550,400)))
 obs_list.append(Actor("white_marshmallow", bottomleft=(11000,300)))
 obs_list.append(Actor("white_marshmallow", bottomleft=(11500,300)))
 obs_list.append(Actor("wide_white_marshmallow", bottomleft=(12000,300)))
 obs_list.append(Actor("white_marshmallow", bottomleft=(13000,450)))
-obs_list.append(Actor("pink_marshmallow", bottomleft=(13250,250)))
-obs_list.append(Actor("wide_pink_marshmallow", bottomleft=(14200,const.HEIGHT)))
+obs_list.append(Actor("pink_marshmallow", bottomleft=(13625,250)))
+obs_list.append(Actor("wide_pink_marshmallow", bottomleft=(14200,450)))
 obs_list.append(Actor("pink_marshmallow", bottomleft=(14557,300)))
 obs_list.append(Actor("wide_white_marshmallow", bottomleft=(14457,const.HEIGHT)))
 obs_list.append(Actor("wide_white_marshmallow", bottomleft=(14642,const.HEIGHT)))
 obs_list.append(Actor("wide_pink_marshmallow", bottomleft=(15758,const.HEIGHT)))
-obs_list.append(Actor("pink_marshmallow", bottomleft=(15400,const.HEIGHT)))
-obs_list.append(Actor("wide_white_marshmallow", bottomleft=(15900,300)))
-obs_list.append(Actor("white_marshmallow", bottomleft=(16400,200)))
-obs_list.append(Actor("white_marshmallow", bottomleft=(17850,const.HEIGHT)))
+obs_list.append(Actor("pink_marshmallow", bottomleft=(15227,const.HEIGHT)))
+obs_list.append(Actor("wide_white_marshmallow", bottomleft=(16050,325)))
+obs_list.append(Actor("white_marshmallow", bottomleft=(16643,200)))
+obs_list.append(Actor("wide_white_marshmallow", bottomleft=(17850,const.HEIGHT)))
 obs_list.append(Actor("pink_marshmallow", bottomleft=(17175,460)))
 obs_list.append(Actor("wide_pink_marshmallow", bottomleft=(18345,300)))
-obs_list.append(Actor("wide_pink_marshmallow", bottomleft=(19150,const.HEIGHT)))
+obs_list.append(Actor("white_marshmallow", bottomleft=(19150,const.HEIGHT)))
 obs_list.append(Actor("wide_pink_marshmallow", bottomleft=(19800,const.HEIGHT)))
-obs_list.append(Actor("pink_marshmallow", bottomleft=(20000,350)))
+obs_list.append(Actor("pink_marshmallow", bottomleft=(20300,350)))
 obs_list.append(Actor("wide_pink_marshmallow", bottomleft=(20700,350)))
-obs_list.append(Actor("pink_marshmallow", bottomleft=(21400,300)))
+obs_list.append(Actor("pink_marshmallow", bottomleft=(21250,300)))
+obs_list.append(Actor("pink_marshmallow", bottomleft=(21700,350)))
 obs_list.append(Actor("wide_pink_marshmallow", bottomleft=(22100,450)))
 obs_list.append(Actor("white_marshmallow", bottomleft=(22700,const.HEIGHT)))
 obs_list.append(Actor("wide_white_marshmallow", bottomleft=(23250,const.HEIGHT)))
@@ -123,7 +128,6 @@ obs_list.append(Actor("wide_white_marshmallow", bottomleft=(24675,200)))
 obs_list.append(Actor("golden_marshmallow", bottomleft=(25500,const.HEIGHT)))
 
 
-#Use this to test
 #obs_list = obs_list[:3]
 #obs_list.append(Actor("golden_marshmallow", bottomleft=(900,const.HEIGHT)))
 
@@ -142,11 +146,12 @@ player.ontop = False
 player_walk_counter = 0
 player_walk_counter2 = 0
 player_fall_counter = 0
+player_jump_counter = 0
 
 # Cutscenes 
 cutscene = Actor("cutscene1", topleft=(0,0))
 doomed_world = Actor("cutscene30", topleft=(0,0))
-saved_world = Actor("cutscene33", topleft=(0,0))
+saved_world = Actor("end_image", topleft=(0,0))
 
 end_cutscene = Actor("cutscene18", topleft=(0,0))
 
@@ -165,8 +170,8 @@ def draw_title():
     screen.draw.textbox("Broccoli The Great Telling", TITLESCREEN,color = color_type,shadow=(0.5,0.5))
     screen.draw.textbox(text.intro_text_prophecy, INTRODUCTION, color = "gold",shadow=(0.5,0.5))
     if (color_type == "green") and (title_counter % 20 == 0):
-      color_type = "white"
-    elif (color_type == "white") and (title_counter % 20 == 0):
+      color_type = "red"
+    elif (color_type == "red") and (title_counter % 20 == 0):
       color_type = "green"
     else:
         pass
@@ -193,12 +198,12 @@ def draw_cutscene():
 def draw_end_cutscene():
   end_cutscene.draw()
   if end_cutscene_number != START_END_CUTSCENE:
-      screen.draw.filled_rect(PREVIOUS_BOX, "dark red")
-      screen.draw.textbox("Previous", PREVIOUS_BOX,color="red",shadow=(0.5,0.5))
-  screen.draw.filled_rect(NEXT_BOX, "dark green")
-  screen.draw.textbox("Next", NEXT_BOX,color="green",shadow=(0.5,0.5))
-  screen.draw.filled_rect(SKIP_BOX, "white")
-  screen.draw.textbox("Skip", SKIP_BOX,color="grey",shadow=(0.5,0.5))
+      screen.draw.filled_rect(PREVIOUS_BOX2, "dark red")
+      screen.draw.textbox("Previous", PREVIOUS_BOX2,color="red",shadow=(0.5,0.5))
+  screen.draw.filled_rect(NEXT_BOX2, "dark green")
+  screen.draw.textbox("Next", NEXT_BOX2,color="green",shadow=(0.5,0.5))
+  screen.draw.filled_rect(SKIP_BOX2, "white")
+  screen.draw.textbox("Skip", SKIP_BOX2,color="grey",shadow=(0.5,0.5))
 
 
 
@@ -224,14 +229,14 @@ def on_mouse_down_state_cutscene(pos):
 
 def on_mouse_down_state_end_cutscene(pos):
     global state, end_cutscene_number
-    if PREVIOUS_BOX.collidepoint(pos) and (end_cutscene_number > START_END_CUTSCENE):
+    if PREVIOUS_BOX2.collidepoint(pos) and (end_cutscene_number > START_END_CUTSCENE):
         end_cutscene_number -= 1
-    if NEXT_BOX.collidepoint(pos):
+    if NEXT_BOX2.collidepoint(pos):
         if end_cutscene_number == END_END_CUTSCENE:
             state = "state_game_won"
         else:
             end_cutscene_number += 1
-    elif SKIP_BOX.collidepoint(pos):
+    elif SKIP_BOX2.collidepoint(pos):
         state = "state_game_won"
 
 
@@ -276,7 +281,7 @@ def draw_play():
 
 
 def update_play_player():
-    global player_walk_counter, player_walk_counter2, player_fall_counter, state
+    global player_walk_counter, player_walk_counter2, player_fall_counter, state, player_jump_counter
     #if player.vy == 0:
     #this was changed because it was annoying not to be able to move in air and causes gameplay issues
     if keyboard.left:
@@ -287,7 +292,11 @@ def update_play_player():
     if player.vy > 0:
       player_fall_counter += 1
       fall_image_counter = (player_fall_counter % 5) + 1
-      player.image = "broccoli_fall" + str(fall_image_counter) 
+      player.image = "broccoli_fall" + str(fall_image_counter)
+    elif player.vy < 0:
+      player_jump_counter += 1
+      jump_image_counter = (player_jump_counter % 2) + 1
+      player.image = "broccoli_jump" + str(jump_image_counter)
     elif player.vx > 0:
       player_walk_counter += 1
       image_counter = (player_walk_counter % 4) + 1
@@ -325,22 +334,21 @@ def check_collision_pink_and_gold(player, obs_list):
 
 def draw_state_game_won():
   saved_world.draw()
-  screen.draw.text("You Won The Game!", topleft = (25,150), fontsize = 60, color = "gold", shadow = (0.5, 0.5))
+
   screen.draw.text("The great telling is complete", topleft = (25,200), fontsize = 60, color = "red", shadow = (0.5, 0.5))
   screen.draw.text("The light of the health sphere's chosen messiah", topleft = (25,250), fontsize = 60, color = "red", shadow = (0.5, 0.5))
-  screen.draw.text("shines bright on the world despite the darkness that is coming", topleft = (25,300), fontsize = 55, color = "forest green", shadow = (0.5, 0.5))
-  screen.draw.text("Thank You For Playing", topleft = (375, 350), fontsize = 60, color = "gold", shadow = (0.5, 0.5))
-  return
-
+  screen.draw.text("shines bright on the world despite the darkness that is coming", topleft = (25,300), fontsize = 55, color = "red", shadow = (0.5, 0.5))
+  screen.draw.text("Will you shut up people are trying to sleep!", topleft = (25, 350), fontsize = 60, color = "gold", shadow = (0.5, 0.5))
+  
 
 
 
 def draw_game_over():
     doomed_world.draw()
-    screen.draw.text("Broccoli's Vison has ended",topleft = (250,150), fontsize = 60, color = "red",shadow=(0.5,0.5))
-    screen.draw.text("He will never be able to fulfill",topleft = (250,200), fontsize = 60, color = "red",shadow=(0.5,0.5))
-    screen.draw.text("the prophecy and the world is doomed!", topleft = (250,250), fontsize = 60, color = "red", shadow = (0.5, 0.5))
-    screen.draw.text("JUNK DAY IS COMING! GAME OVER!",topleft = (250,300), fontsize = 60, color = "dark red",shadow=(0.5,0.5))
+    screen.draw.text("Broccoli's Vison has ended",topleft = (250,100), fontsize = 60, color = "red",shadow=(0.5,0.5))
+    screen.draw.text("He will never be able to fulfill",topleft = (250,150), fontsize = 60, color = "red",shadow=(0.5,0.5))
+    screen.draw.text("the prophecy and the world is doomed!", topleft = (250,200), fontsize = 60, color = "red", shadow = (0.5, 0.5))
+    screen.draw.text("JUNK DAY IS COMING!",topleft = (250,250), fontsize = 60, color = "red",shadow=(0.5,0.5))
     return
 
 

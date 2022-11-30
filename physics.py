@@ -41,7 +41,7 @@ def check_collision(obs_list, player):
     '''
     for obs in obs_list:
         if player.colliderect(obs):
-            if (player.bottom - 16 < obs.top) and (player.vy >= 0): # hitting the top of the obs
+            if (player.bottom - 20 < obs.top) and (player.vy >= 0): # hitting the top of the obs
                 player.vy = 0
                 player.ontop = True
                 return True
